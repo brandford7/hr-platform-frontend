@@ -19,7 +19,7 @@ import type { Holiday } from "@/types/api.types";
 
 export function HolidaysPage() {
   const { user } = useAuthStore();
-  const canManage = user?.roleName !== "Employee";
+  const canManage = user?.roleName !== "EMPLOYEE";
   const qc = useQueryClient();
 
   const [year, setYear] = useState(new Date().getFullYear());
