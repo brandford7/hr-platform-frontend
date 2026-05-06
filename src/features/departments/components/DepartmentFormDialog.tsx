@@ -18,7 +18,7 @@ import z from "zod";
 const deptSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   description: z.string().max(500).optional(),
-  managerId: z.string().uuid().optional().or(z.literal("")),
+  managerId: z.uuid().optional().or(z.literal("")),
 });
 type DeptFormValues = z.infer<typeof deptSchema>;
 

@@ -6,7 +6,6 @@ import {
   Monitor,
   LogOut,
   User,
-  KeyRound,
 } from "lucide-react";
 import { Link } from "react-router";
 import { useUIStore } from "../store/ui.store";
@@ -80,12 +79,6 @@ export function Header() {
             <DropdownMenuItem asChild>
               <Link to="/employees/me" className="cursor-pointer">
                 <User size={14} className="mr-2" /> My Profile
-              </Link>
-            </DropdownMenuItem>
-
-            <DropdownMenuItem asChild>
-              <Link to="/change-password" className="cursor-pointer">
-                <KeyRound size={14} className="mr-2" /> Change Password
               </Link>
             </DropdownMenuItem>
 

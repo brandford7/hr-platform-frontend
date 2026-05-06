@@ -22,7 +22,7 @@ export function Sidebar() {
 
   // Build nav items conditionally — never show items the user cannot access
   const navItems = [
-    { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard, show: true },
+    { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard, show: access.canViewDashboard },
     {
       to: "/employees",
       label: "Employees",

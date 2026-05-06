@@ -98,7 +98,7 @@ function AppRoutes() {
         <Route index element={<Navigate to="/dashboard" replace />} />
 
         {/* Available to all authenticated users */}
-        <Route path="/dashboard" element={<DashboardPage />} />
+
         <Route path="/employees/me" element={<MyProfilePage />} />
         <Route path="/leave" element={<LeavePage />} />
         <Route path="/attendance" element={<AttendancePage />} />
@@ -108,6 +108,14 @@ function AppRoutes() {
         <Route path="/employees/:id" element={<EmployeeProfilePage />} />
 
         {/* Admin / Manager only */}
+        <Route
+          path="/dashboard"
+          element={
+            <RequireAccess allowed={access.canViewDashboard}>
+              <DashboardPage />
+            </RequireAccess>
+          }
+        />
         <Route
           path="/employees"
           element={

@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { DepartmentCard } from "@/features/departments/components/DepartmentCard";
 import { DeptEmployeesDialog } from "@/features/departments/components/DepartmentEmployeesDialog";
-import { DepartmentFormDialog } from "@/features/departments/components/DepartmentForDialog";
+import { DepartmentFormDialog } from "@/features/departments/components/DepartmentFormDialog";
 import { useAccess } from "@/features/security/hooks/useAccess";
 import { departmentService } from "@/services/department.service";
 import type { Department } from "@/types/api.types";
@@ -142,6 +142,7 @@ export function DepartmentsPage() {
       )}
 
       {/* Create dialog */}
+      
       <DepartmentFormDialog open={createOpen} onOpenChange={setCreateOpen} />
 
       {/* Edit dialog */}

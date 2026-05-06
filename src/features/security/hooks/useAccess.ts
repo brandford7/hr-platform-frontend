@@ -10,7 +10,7 @@ export function useAccess() {
   const roleName = user?.roleName;
   const isAdmin = roleName === "ADMIN";
   const isHR = roleName === "MANAGER";
-  const isAdminOrHR = isAdmin || isHR;
+  const isAdminOrHR = user?.roleName !== "EMPLOYEE"; // Both Admins and HR Managers can do most management tasks
 
   // 2. Job Position Flags (from the JobPosition table)
   // Matching the "Department Manager" title from your seeded positions
@@ -42,11 +42,14 @@ export function useAccess() {
     canEditEmployee: isAdminOrHR,
     canDeleteEmployee: isAdmin,
 
+//Dashboard visibility is based on having any managerial access, not just admin
+    canViewDashboard: isManagerial,
+
     // ── Department Management ───────────────────────────────────────────────
-    canCreateDepartment: isAdmin,
+    canCreateDepartment: isAdminOrHR,
     canEditDepartment: isAdminOrHR,
     canDeleteDepartment: isAdmin,
-    canAssignManager: isAdmin,
+    canAssignManager: isAdminOrHR,
 
     // ── Leave & Attendance ──────────────────────────────────────────────────
     canApproveLeave: isManagerial,
