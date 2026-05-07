@@ -4,7 +4,6 @@ import { TeamAttendanceView } from "@/features/attendance/components/TeamAttenda
 import { useAccess } from "@/features/security/hooks/useAccess";
 import { format } from "date-fns";
 
-
 export function AttendancePage() {
   const access = useAccess();
 
@@ -23,11 +22,16 @@ export function AttendancePage() {
       {/* Own history — always visible */}
       <MyAttendanceHistory />
 
-      {/* Team view — admin sees all, manager sees their dept */}
-      {access.canViewDeptAttendance && (
+      {/* Team view — Admins/HR see all, Managers see only their department */}
+      {(access.canViewAllAttendance || access.canViewDeptAttendance) && (
         <>
           <div className="border-t pt-4" />
-          <TeamAttendanceView scopeToDept={access.isDeptManager} />
+          <TeamAttendanceView
+            // If they can't view ALL, then we must scope to their DEPT
+            scopeToDept={
+              !access.canViewAllAttendance && access.canViewDeptAttendance
+            }
+          />
         </>
       )}
     </div>

@@ -1,12 +1,10 @@
-
 import { useAuthStore } from "@/store/auth.store";
-
 
 export function useAccess() {
   const { user } = useAuthStore();
- 
-    // 1. System Role Flags (from the Role table)
-    
+
+  // 1. System Role Flags (from the Role table)
+
   const roleName = user?.roleName;
   const isAdmin = roleName === "ADMIN";
   const isHR = roleName === "MANAGER";
@@ -15,6 +13,8 @@ export function useAccess() {
   // 2. Job Position Flags (from the JobPosition table)
   // Matching the "Department Manager" title from your seeded positions
   const isDeptManager = user?.jobPosition === "Department Manager";
+
+  console.log(user);
 
   // 3. Combined Authority Flags
   // Used for features shared by Admins, HR, and Managers
@@ -32,7 +32,7 @@ export function useAccess() {
 
     // ── Page Access ─────────────────────────────────────────────────────────
     // Drives Sidebar visibility and high-level Route Guards
-    canViewEmployeeList: isManagerial,
+    canViewEmployeeList: isAdminOrHR, // Only Admins and HR Managers should see the full employee list
     canViewDepartments: isAdminOrHR, // Usually only Admin/HR manage the org structure
     canViewHolidays: true, // Everyone usually needs to see the holiday calendar
     canViewSecurity: isAdmin, // Strictly for system admins
@@ -42,8 +42,8 @@ export function useAccess() {
     canEditEmployee: isAdminOrHR,
     canDeleteEmployee: isAdmin,
 
-//Dashboard visibility is based on having any managerial access, not just admin
-    canViewDashboard: isManagerial,
+    //Dashboard visibility is based on having any managerial access, not just admin
+    canViewDashboard: isAdminOrHR,
 
     // ── Department Management ───────────────────────────────────────────────
     canCreateDepartment: isAdminOrHR,
